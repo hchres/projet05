@@ -16,3 +16,65 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+const imagesPath = "/assets/images/slideshow/";
+
+document.querySelector(".arrow_left").addEventListener("click", previous)
+document.querySelector(".arrow_right").addEventListener("click", next)
+
+let currentPosition = 0;
+// Au chargement.
+setValues();
+
+function previous() {
+	currentPosition = previousIndex(currentPosition, slides.length)
+    console.log(currentPosition);
+	setValues();
+}
+
+function previousIndex(currentPosition, length) {
+ 	if (length === 0) return 0;
+    return (currentPosition - 1 + length) % length;
+}
+
+function next() {
+	currentPosition = nextIndex(currentPosition, slides.length)
+    console.log(currentPosition);
+	setValues();
+}
+
+function nextIndex(currentPosition, length) {
+	if (length === 0) return 0;
+    return (currentPosition + 1) % length;
+}
+
+function setPosition(position) {
+	currentPosition = position;
+	setValues();
+}
+
+function setValues(){
+	let image = document.querySelector(".banner-img");
+	image.src = imagesPath + slides[currentPosition].image;
+
+	let tagLine = document.querySelector("#banner p");
+	tagLine.innerHTML = slides[currentPosition].tagLine;
+
+	// Sélectionne tous span .dot dans la div .dots
+	let dots = document.querySelectorAll(".dots .dot");
+
+	// Loop dessus et pour chaque élément:
+	dots.forEach((elem, index) => {
+		// reset les classes CSS à uniquement dot
+		elem.className = "dot";
+		// si l'index est égal à currentPosition
+		if (index === currentPosition) {
+			// on ajoute la class CSS dot_selected (note le +=)
+			elem.className += " dot_selected";
+		}
+	})
+}
+
+
+
+
