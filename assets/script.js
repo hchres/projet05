@@ -17,7 +17,7 @@ const slides = [
 	}
 ]
 
-const imagesPath = "/assets/images/slideshow/";
+const imagesPath = "./assets/images/slideshow/";
 
 document.querySelector(".arrow_left").addEventListener("click", previous)
 document.querySelector(".arrow_right").addEventListener("click", next)
